@@ -16,3 +16,6 @@ https://taste.tuxfamily.org/wiki/index.php?title=Tricks_and_tools_for_PREEMPT-RT
 
 
 https://www.balena.io/etcher/
+
+
+https://medium.com/@jagan.dream/cross-compile-flash-kernel-for-raspberry-pi-3-29699275abc6
