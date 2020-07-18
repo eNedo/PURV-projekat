@@ -22,3 +22,7 @@ https://medium.com/@jagan.dream/cross-compile-flash-kernel-for-raspberry-pi-3-29
 
 
 http://raspberrypi.link-tech.de/doku.php?id=canberry
+
+
+
+http://nopnop2002.webcrow.jp/CAN/CAN-RaspberryPi.html
