@@ -19,3 +19,6 @@ https://www.balena.io/etcher/
 
 
 https://medium.com/@jagan.dream/cross-compile-flash-kernel-for-raspberry-pi-3-29699275abc6
+
+
+http://raspberrypi.link-tech.de/doku.php?id=canberry
