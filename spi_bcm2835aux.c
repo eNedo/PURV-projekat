@@ -195,16 +195,24 @@ static void bcm2835aux_spi_transfer_helper(struct bcm2835aux_spi *bs)
 		bcm2835aux_wr_fifo(bs);
 	}
 }
-
-static irqreturn_t bcm2835aux_spi_interrupt(int irq, void *dev_id)
+static irqreturn_t bcm2835_spi_interrupt(int irq, void *dev_id)
 {
 	struct spi_master *master = dev_id;
-	struct bcm2835aux_spi *bs = spi_master_get_devdata(master);
+	struct bcm2835_spi *bs = spi_master_get_devdata(master);
 
 	/* IRQ may be shared, so return if our interrupts are disabled */
 	if (!(bcm2835aux_rd(bs, BCM2835_AUX_SPI_CNTL1) &
 	      (BCM2835_AUX_SPI_CNTL1_TXEMPTY | BCM2835_AUX_SPI_CNTL1_IDLE)))
 		return IRQ_NONE;
+
+	return IRQ_WAKE_THREAD;
+}
+static irqreturn_t bcm2835aux_spi_threaded_interrupt(int irq, void *dev_id)
+{
+	struct spi_master *master = dev_id;
+	struct bcm2835aux_spi *bs = spi_master_get_devdata(master);
+
+	
 
 	/* do common fifo handling */
 	bcm2835aux_spi_transfer_helper(bs);
@@ -476,8 +484,8 @@ static int bcm2835aux_spi_probe(struct platform_device *pdev)
 	/* reset SPI-HW block */
 	bcm2835aux_spi_reset_hw(bs);
 
-	err = devm_request_threaded_irq(&pdev->dev, bs->irq,NULL,
-			       bcm2835aux_spi_interrupt,
+	err = devm_request_threaded_irq(&pdev->dev, bs->irq,NULL,bcm2835aux_spi_interrupt
+			       bcm2835aux_spi_threaded_interrupt,
 			       IRQF_SHARED,
 			       dev_name(&pdev->dev), master);
 	if (err) {
