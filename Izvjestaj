@@ -1,0 +1,31 @@
+  NON-RT (obicna) izvedba
+
+Postavili smo odgovarajuci overlay u /boot/overlays/ i stavili adekvatne parametre u konfiguracioni fajl /boot/config.txt. 
+Kao sto je objasnjeno na sedmoj laboratorijskoj vjezbi iz IKM-a. Skinuli smo i podesili can-utilis alate za manipulaciju CAN mrezom. 
+Alatom cangen smo slali nasumicne CAN pakete sa razlicitom zadrskom izmedju slanja poruka i posmatrali da li dolazi do gubitaka. 
+
+bitrate      10kbps     125kbps  1mbps 
+gap           15ms       4ms     1ms 
+                                        *navedeno vrijeme je minimalna pauza izmedju poruka za koje komunikacija prolazi bez gubitaka
+                                       *za podrazumjevane postavke oscilatora i spi frekvencije
+                                       
+Povecavanjem spi frekvencije nije doslo do promjene u prenosu. Veci bitrate daje bolje rezultate, sto je ocekivano. 
+Ucitali smo modifikovani spi-bcm2835aux drajver umjesto podrazumjevanog, jedina izmjena je napravljena je da se dize tredovski prekid. 
+Smatramo da drajver mcp251x nema potrebe modifikovati, obzirom da je on vec podrazumjevano ima tredovski prekid. 
+Opet smo iskoristili navede CAN alate i pokusali ostvariti komunikaciju sa sto manjim razmakom izmedju poruka bez gubitaka, sa navedenim bitrejtovima. 
+Nismo uocili nikakvu razliku. Odlucili smo iskoristiti komandu chrt, pa smo tredovskim prekidima dodjelili maksimalne moguce prioritete (99).
+Pokusali smo opet. Primjetno je da prolazi vise poruka prije nego dodje do overflow-a, medjutim ocekivali smo bolje rezultate. 
+
+  RT izvedba
+Na kartice smo prenjeli imidz (pomocu BalenaEtcher-a) linux-a, kojeg smo pecirali i podesili neophodne alate. 
+Stavili smo iste overlay-e, i probali komunikaciju sa istim bitrejtovima. Dobili smo gore rezultate, pogotovo za vise bitrejtove. 
+Brze je doslo do zasicenja bafera. Nismo ocekivali tako nesto, mislili smo da je problem u prioritetima.
+Shodno tome opet smo ih  digli na najvise moguce (za bcm2845, za mcp215x, pa za oba). Probali smo sve varijante.
+Na kraju smo opet digli spi frekvenciju, sto nije pomoglo. 
+Opet smo dosli do rezultata koji su gori od prethodne izvedbe.
+
+
+
+
+
+
