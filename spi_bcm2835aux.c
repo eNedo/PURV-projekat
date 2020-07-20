@@ -44,7 +44,7 @@
  *   brcm_usrlib/dag/vmcsx/vcinclude/bcm2708_chip/aux_io.h
  * inside of:
  *   http://www.broadcom.com/docs/support/videocore/Brcm_Android_ICS_Graphics_Stack.tar.gz
- */
+ */   
 
 /* SPI register offsets */
 #define BCM2835_AUX_SPI_CNTL0	0x00
