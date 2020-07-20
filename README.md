@@ -26,3 +26,6 @@ http://raspberrypi.link-tech.de/doku.php?id=canberry
 
 
 http://nopnop2002.webcrow.jp/CAN/CAN-RaspberryPi.html
+
+
+https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/
