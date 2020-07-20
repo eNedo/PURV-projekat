@@ -24,7 +24,7 @@
 #include <linux/clk.h>
 #include <linux/completion.h> 
 #include <linux/delay.h>
-#include <linux/dma-mapping.h>
+#include <linux/dma-mapping.h> 
 #include <linux/dmaengine.h>
 #include <linux/err.h>
 #include <linux/interrupt.h>
